@@ -1,0 +1,12 @@
+requests>=2.31
+# Optional — only needed if you use synth.py --render to rasterize
+# synthetic HTML to PDF. Heavy system deps on macOS:
+#   brew install pango cairo glib gdk-pixbuf libffi
+# weasyprint>=62
+#
+# Optional — only needed for notion_sync.py (publishing the use-case set
+# to a Notion database).
+# notion-client>=2.2
+#
+# Optional — only needed if you want a richer schema validator
+# jsonschema>=4

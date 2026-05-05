@@ -1,0 +1,45 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Customer data — never commit (Phase 2 synth only)
+*.pdf
+*.PDF
+inputs/
+customer_data/
+
+# Build / cache artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Run results / per-file outputs
+results/
+synth_results/
+*.result.json
+*.synth.html
+*.synth.pdf
+*.synth.json
+*.parse.json
+seo_*.html
+seo_*.json
+
+# Editor / OS junk
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# OMC runtime state
+.omc/

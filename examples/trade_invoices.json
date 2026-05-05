@@ -1,0 +1,35 @@
+{
+  "schema_name": "trade_invoice",
+  "classes": [
+    {
+      "const": "commercial_invoice",
+      "description": "Commercial invoice for international trade. Header reads 'COMMERCIAL INVOICE'. Has FROM (seller) and TO (buyer/ASUNGHMP), INV.NO, DATE, departure/destination ports, products table with item no/description/qty/unit price/amount, TOTAL with USD currency, payment terms, and bank info. Not a packing list and not a proforma."
+    },
+    {
+      "const": "packing_list",
+      "description": "Packing list for shipment. Header reads 'PACKING LIST'. Has carton numbers (CTN NO), CTNS count, item no, quantity, color no, carton size (CTN SIZE), gross weight (G.W.), net weight (N.W.), and CBM volume. References an invoice number. Not fiscal — no totals, VAT, or unit prices."
+    },
+    {
+      "const": "proforma_invoice",
+      "description": "Proforma invoice issued before final commercial invoice. Header reads 'PROFORMA INVOICE' (not 'COMMERCIAL INVOICE'). Same layout as commercial invoice with FROM/TO, INV.NO, DATE, products table, totals, bank info. The only reliable distinguishing feature is the word 'PROFORMA' in the header."
+    },
+    {
+      "const": "others",
+      "description": "Documents that do not belong to the above types."
+    }
+  ],
+  "extract_schema": {
+    "type": "object",
+    "properties": {
+      "invoice_number":   {"type": "string", "description": "INV.NO printed on the document, e.g. 'JSJT-DC20251125-2' or '20260101'."},
+      "vendor_name":      {"type": "string", "description": "Seller / FROM company. Often a Chinese manufacturer name like 'JIANGSU JIUTONG PLASTIC MANUFACTURING CO.,LTD'."},
+      "buyer_name":       {"type": "string", "description": "Buyer / TO company, typically 'ASUNGHMP CO.,Ltd' for this account."},
+      "invoice_date":     {"type": "string", "description": "Issue date as written; normalize to YYYY-MM-DD. 'Nov 25th, 2025' -> '2025-11-25'."},
+      "departure_port":   {"type": "string", "description": "DEPARTURE PORT or 'FROM' city/country, e.g. 'Shanghai'."},
+      "destination_port": {"type": "string", "description": "DESTINATION PORT or 'TO' city/country, e.g. 'Pyongtaek'."},
+      "currency":         {"type": "string", "description": "ISO 4217 currency code. Default to USD if FOB price or '$' is shown without explicit code."},
+      "total_amount":     {"type": "string", "description": "Grand TOTAL of the invoice as shown, e.g. '$7,920.00' or '$35,097.84'."}
+    },
+    "required": ["invoice_number", "vendor_name", "buyer_name", "invoice_date", "total_amount"]
+  }
+}

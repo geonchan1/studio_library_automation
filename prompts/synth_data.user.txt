@@ -1,0 +1,15 @@
+Synthesize a layout-preserving fake of the document below.
+
+ORIGINAL_PARSED_DOCUMENT:
+<<<
+{parsed_layout_json}
+>>>
+
+OPTIONAL_HINTS:
+- target_industry: {target_industry}     # e.g., "household plastics", "textile", "consumer electronics"
+- target_country_pair: {country_pair}    # e.g., "CN -> KR", "VN -> US"
+- target_currency: {target_currency}     # e.g., "USD"; leave blank to keep original
+- preserve_extra: {extra_fields}         # JSON path list of fields to keep verbatim beyond the system rules
+- swap_extra:     {extra_swap_fields}    # JSON path list of fields to forcibly swap
+
+Return synth_layout.json only.
